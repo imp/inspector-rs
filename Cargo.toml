@@ -1,6 +1,22 @@
 [package]
 name = "inspector"
-version = "0.1.0"
+version = "0.0.0"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
+categories = ["data-structures"]
+documentation = "https://docs.rs/inspector"
+keywords = ["inspect"]
+license = "Apache-2.0 OR MIT"
+readme = "README.md"
+repository = "https://gitlab.com/imp/inspector-rs.git"
+description = "General purpose inspection for popular structures"
+
+
+[badges]
+gitlab = { repository = "imp/inspector-rs" }
+maintenance = { status = "experimental" }
+#travis-ci = { repository = "imp/inspector-rs" }
 
 [dependencies]
+
+[features]
+pedantic = []
