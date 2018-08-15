@@ -1,0 +1,34 @@
+.cargo_test_template: &cargo_test
+  stage: test
+  script:
+    - cargo test --verbose --jobs 1
+
+stages:
+  - test
+  - deploy
+
+cargo:stable:
+  image: rustdocker/rust:stable
+  <<: *cargo_test
+
+cargo:beta:
+  image: rustdocker/rust:beta
+  <<: *cargo_test
+
+cargo:nightly:
+  image: rustdocker/rust:nightly
+  <<: *cargo_test
+
+.pages:
+  image: rustdocker/rust:stable
+  stage: deploy
+  only:
+    - master
+  script:
+    - cargo doc
+    - rm -rf public
+    - mkdir public
+    - cp -R target/doc/* public
+  artifacts:
+    paths:
+    - public
