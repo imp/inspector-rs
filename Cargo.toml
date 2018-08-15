@@ -17,6 +17,7 @@ maintenance = { status = "experimental" }
 #travis-ci = { repository = "imp/inspector-rs" }
 
 [dependencies]
+dont_panic = "0.1.0"
 
 [features]
 pedantic = []
