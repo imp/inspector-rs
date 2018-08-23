@@ -16,7 +16,7 @@ impl<T, E> Inspector<T, E> for Result<T, E>
 where
     T: fmt::Debug,
 {
-    fn inspect<F>(self, mut f: F) -> Result<T, E>
+    fn inspect<F>(self, mut f: F) -> Self
     where
         F: FnMut(&T),
     {
@@ -26,7 +26,7 @@ where
         self
     }
 
-    fn inspect_err<F>(self, mut f: F) -> Result<T, E>
+    fn inspect_err<F>(self, mut f: F) -> Self
     where
         F: FnMut(&E),
     {
@@ -36,7 +36,7 @@ where
         self
     }
 
-    fn debug(self) -> Result<T, E> {
+    fn debug(self) -> Self {
         self.inspect(|item| println!("{:?}", item))
     }
 }

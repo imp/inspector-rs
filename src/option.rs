@@ -12,7 +12,7 @@ impl<T> Inspector<T> for Option<T>
 where
     T: fmt::Debug,
 {
-    fn inspect<F>(self, mut f: F) -> Option<T>
+    fn inspect<F>(self, mut f: F) -> Self
     where
         F: FnMut(&T),
     {
