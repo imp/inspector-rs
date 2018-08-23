@@ -14,7 +14,7 @@ mod tests {
     fn borrowed() {
         let o = Some(2);
         let b = &o;
-        o.inspect(|i| assert_eq!(*i, 2));
+        b.inspect(|i| assert_eq!(*i, 2));
     }
 
     #[test]
