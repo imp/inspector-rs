@@ -97,19 +97,23 @@ where
         self.iter.size_hint()
     }
 
-//    #[inline]
-//    fn try_fold<Acc, Fold, R>(&mut self, init: Acc, mut fold: Fold) -> R where
-//        Self: Sized, Fold: FnMut(Acc, Self::Item) -> R, R: ops::Try<Ok=Acc>
-//    {
-//        let f = &mut self.f;
-//        self.iter.try_fold(init, move |acc, item| { f(&item); fold(acc, item) })
-//    }
+    //    #[inline]
+    //    fn try_fold<Acc, Fold, R>(&mut self, init: Acc, mut fold: Fold) -> R where
+    //        Self: Sized, Fold: FnMut(Acc, Self::Item) -> R, R: ops::Try<Ok=Acc>
+    //    {
+    //        let f = &mut self.f;
+    //        self.iter.try_fold(init, move |acc, item| { f(&item); fold(acc, item) })
+    //    }
 
     #[inline]
     fn fold<Acc, Fold>(self, init: Acc, mut fold: Fold) -> Acc
-        where Fold: FnMut(Acc, Self::Item) -> Acc,
+    where
+        Fold: FnMut(Acc, Self::Item) -> Acc,
     {
         let mut f = self.f;
-        self.iter.fold(init, move |acc, item| { f(&item); fold(acc, item) })
+        self.iter.fold(init, move |acc, item| {
+            f(&item);
+            fold(acc, item)
+        })
     }
 }

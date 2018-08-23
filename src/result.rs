@@ -12,7 +12,6 @@ pub trait Inspector<T, E> {
     fn debug(self) -> Result<T, E>;
 }
 
-
 impl<T, E> Inspector<T, E> for Result<T, E>
 where
     T: fmt::Debug,
