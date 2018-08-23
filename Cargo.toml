@@ -14,7 +14,7 @@ description = "General purpose inspection for popular data structures"
 [badges]
 gitlab = { repository = "imp/inspector-rs" }
 maintenance = { status = "experimental" }
-#travis-ci = { repository = "imp/inspector-rs" }
+travis-ci = { repository = "imp/inspector-rs" }
 
 [dependencies]
 
