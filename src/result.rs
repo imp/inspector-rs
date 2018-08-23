@@ -1,24 +1,25 @@
-use super::Inspector;
+use std::fmt;
 
-impl<T, E> Inspector for Result<T, E>
+pub trait Inspector<T, E> {
+    fn inspect<F>(self, f: F) -> Result<T, E>
+    where
+        F: FnMut(&T);
+
+    fn inspect_err<F>(self, f: F) -> Result<T, E>
+    where
+        F: FnMut(&E);
+
+    fn debug(self) -> Result<T, E>;
+}
+
+
+impl<T, E> Inspector<T, E> for Result<T, E>
 where
-    T: Sized,
-    E: Sized,
+    T: fmt::Debug,
 {
-    type ItemOk = T;
-    type ItemErr = E;
-
-    fn inspect<F>(self, mut f: F) -> Self
+    fn inspect<F>(self, mut f: F) -> Result<T, E>
     where
-        F: FnMut(&Self),
-    {
-        f(&self);
-        self
-    }
-
-    fn inspect_ok<F>(self, mut f: F) -> Self
-    where
-        F: FnMut(&Self::ItemOk),
+        F: FnMut(&T),
     {
         if let Ok(ref item) = self {
             f(item);
@@ -26,9 +27,9 @@ where
         self
     }
 
-    fn inspect_err<F>(self, mut f: F) -> Self
+    fn inspect_err<F>(self, mut f: F) -> Result<T, E>
     where
-        F: FnMut(&Self::ItemErr),
+        F: FnMut(&E),
     {
         if let Err(ref item) = self {
             f(item);
@@ -36,11 +37,7 @@ where
         self
     }
 
-    fn debug(self) -> Self {
-        unimplemented!()
-    }
-
-    fn display(self) -> Self {
-        unimplemented!()
+    fn debug(self) -> Result<T, E> {
+        self.inspect(|item| println!("{:?}", item))
     }
 }

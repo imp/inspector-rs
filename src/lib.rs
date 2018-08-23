@@ -1,10 +1,22 @@
-#[macro_use]
-extern crate dont_panic;
+//#[macro_use]
+//extern crate dont_panic;
 
+#[cfg(feature = "iter")]
+mod iter;
+#[cfg(feature = "option")]
 mod option;
+#[cfg(feature = "result")]
 mod result;
 
-pub trait Inspector {
+#[cfg(feature = "iter")]
+pub use iter::Inspector as IterInspector;
+#[cfg(feature = "option")]
+pub use option::Inspector as OptionInspector;
+#[cfg(feature = "result")]
+pub use result::Inspector as ResultInspector;
+
+
+pub trait MasterInspector {
     type ItemOk: Sized;
     type ItemErr: Sized;
 

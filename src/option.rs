@@ -1,42 +1,28 @@
-use super::Inspector;
+use std::fmt;
 
-impl<T> Inspector for Option<T>
+pub trait Inspector<T> {
+    fn inspect<F>(self, f: F) -> Option<T>
+    where
+        F: FnMut(&T);
+
+    fn debug(self) -> Option<T>;
+}
+
+impl<T> Inspector<T> for Option<T>
 where
-    T: Sized,
+    T: fmt::Debug,
 {
-    type ItemOk = T;
-    type ItemErr = ();
-
-    fn inspect<F>(self, mut f: F) -> Self
+    fn inspect<F>(self, mut f: F) -> Option<T>
     where
-        F: FnMut(&Self),
-    {
-        f(&self);
-        self
-    }
-
-    fn inspect_ok<F>(self, mut f: F) -> Self
-    where
-        F: FnMut(&Self::ItemOk),
+        F: FnMut(&T),
     {
         if let Some(ref item) = self {
-            f(item);
+            f(item)
         }
         self
     }
 
-    fn inspect_err<F>(self, mut _f: F) -> Self
-    where
-        F: FnMut(&Self::ItemErr),
-    {
-        dont_panic!();
-    }
-
     fn debug(self) -> Self {
-        unimplemented!()
-    }
-
-    fn display(self) -> Self {
-        unimplemented!()
+        self.inspect(|item| println!("{:?}", item))
     }
 }
