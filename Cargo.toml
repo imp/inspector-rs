@@ -8,7 +8,7 @@ keywords = ["inspect"]
 license = "Apache-2.0 OR MIT"
 readme = "README.md"
 repository = "https://gitlab.com/imp/inspector-rs.git"
-description = "General purpose inspection for popular structures"
+description = "General purpose inspection for popular data structures"
 
 
 [badges]
