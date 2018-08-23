@@ -8,9 +8,9 @@
 //! you can choose which one is available.
 //!
 //! # Features
-//! `option` - enables trait `OptionInspector`
-//! `result` - enables trait `ResultInspector`
-//! `iter` - enables trait `IterInspector` (broken at the moment)
+//! - `option` - enables trait `OptionInspector`
+//! - `result` - enables trait `ResultInspector`
+//! - `iter` - enables trait `IterInspector` (broken at the moment)
 
 #![cfg_attr(
     all(feature = "cargo-clippy", feature = "pedantic"),
