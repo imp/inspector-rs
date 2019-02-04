@@ -13,7 +13,8 @@ mod tests {
         o.inspect(|i| {
             inspect_called = true;
             assert_eq!(*i, 2)
-        }).unwrap();
+        })
+        .unwrap();
 
         assert!(inspect_called);
 
@@ -29,14 +30,16 @@ mod tests {
         o.inspect(|i| {
             inspect_called = true;
             assert_eq!(*i, 3)
-        }).unwrap_err();
+        })
+        .unwrap_err();
 
         assert!(!inspect_called);
 
         o.inspect_err(|i| {
             inspect_called = true;
             assert_eq!(*i, 3)
-        }).unwrap_err();
+        })
+        .unwrap_err();
 
         assert!(inspect_called);
 
