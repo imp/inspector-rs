@@ -2,6 +2,7 @@
 name = "inspector"
 version = "0.0.1"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
+edition = "2018"
 categories = ["data-structures"]
 documentation = "https://docs.rs/inspector"
 keywords = ["inspect"]
@@ -17,11 +18,12 @@ maintenance = { status = "experimental" }
 travis-ci = { repository = "imp/inspector-rs" }
 
 [dependencies]
+futures = { version = "0.1", optional = true }
 
 [features]
 #default = ["iter", "option", "result"]
-default = ["option", "result"]
-pedantic = []
+default = ["futures", "option", "result"]
 iter = []
 option = []
+pedantic = []
 result = []

@@ -11,14 +11,15 @@
 //! - `option` - enables trait `OptionInspector`
 //! - `result` - enables trait `ResultInspector`
 //! - `iter` - enables trait `IterInspector` (broken at the moment)
+//! - `futures` - enables trait `FuturesInspector`
 
-#![cfg_attr(
-    all(feature = "cargo-clippy", feature = "pedantic"),
-    warn(clippy_pedantic)
-)]
-#![cfg_attr(feature = "cargo-clippy", warn(use_self))]
+#![cfg_attr(feature = "pedantic", warn(clippy::pedantic))]
+#![warn(rust_2018_idioms)]
+#![warn(clippy::use_self)]
 #![deny(warnings, missing_debug_implementations)]
 
+#[cfg(feature = "futures")]
+mod future;
 #[cfg(feature = "iter")]
 mod iter;
 #[cfg(feature = "option")]
@@ -26,9 +27,11 @@ mod option;
 #[cfg(feature = "result")]
 mod result;
 
+#[cfg(feature = "futures")]
+pub use crate::future::Inspector as FuturesInspector;
 #[cfg(feature = "iter")]
-pub use iter::Inspector as IterInspector;
+pub use crate::iter::Inspector as IterInspector;
 #[cfg(feature = "option")]
-pub use option::Inspector as OptionInspector;
+pub use crate::option::Inspector as OptionInspector;
 #[cfg(feature = "result")]
-pub use result::Inspector as ResultInspector;
+pub use crate::result::Inspector as ResultInspector;
