@@ -18,7 +18,7 @@ mod tests {
 
         assert!(inspect_called);
 
-        o.inspect_err(|_| assert!(false)).unwrap();
+        o.inspect_err(|_| unreachable!()).unwrap();
     }
 
     #[test]
@@ -43,6 +43,6 @@ mod tests {
 
         assert!(inspect_called);
 
-        o.inspect(|_| assert!(false)).unwrap_err();
+        o.inspect(|_| unreachable!()).unwrap_err();
     }
 }
