@@ -19,6 +19,9 @@ travis-ci = { repository = "imp/inspector-rs" }
 [dependencies]
 futures = { version = "0.1", optional = true }
 
+[dev-dependencies]
+log = "0.4"
+
 [features]
 default = ["futures", "option", "result"]
 iter = []
