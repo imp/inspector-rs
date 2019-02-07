@@ -45,7 +45,8 @@ where
     }
 }
 
-pub trait Inspector<I, E>: Future<Item = I, Error = E> {
+#[allow(clippy::module_name_repetitions)]
+pub trait FutureInspector<I, E>: Future<Item = I, Error = E> {
     fn inspect_err<F>(self, f: F) -> InspectErr<Self, F>
     where
         for<'r> F: FnOnce(&'r Self::Error) -> (),
@@ -57,7 +58,7 @@ pub trait Inspector<I, E>: Future<Item = I, Error = E> {
     // fn debug(self) -> future::Inspect<Self, _>;
 }
 
-impl<I, E, T> Inspector<I, E> for T where T: Future<Item = I, Error = E> {}
+impl<I, E, T> FutureInspector<I, E> for T where T: Future<Item = I, Error = E> {}
 
 fn assert_future<A, B, F>(f: F) -> F
 where

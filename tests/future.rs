@@ -1,7 +1,7 @@
 #[cfg(all(test, feature = "futures"))]
 mod tests {
     use futures::future::{empty, err, ok, Future};
-    use inspector::FuturesInspector;
+    use inspector::FutureInspector;
 
     #[test]
     fn future_not_ready() {

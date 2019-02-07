@@ -28,10 +28,10 @@ mod option;
 mod result;
 
 #[cfg(feature = "futures")]
-pub use crate::future::Inspector as FuturesInspector;
+pub use crate::future::FutureInspector;
 #[cfg(feature = "iter")]
-pub use crate::iter::Inspector as IterInspector;
+pub use crate::iter::IterInspector;
 #[cfg(feature = "option")]
-pub use crate::option::Inspector as OptionInspector;
+pub use crate::option::OptionInspector;
 #[cfg(feature = "result")]
-pub use crate::result::Inspector as ResultInspector;
+pub use crate::result::ResultInspector;

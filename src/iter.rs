@@ -2,7 +2,7 @@ use std::fmt;
 use std::iter::Iterator;
 //use std::ops;
 
-pub trait Inspector: Iterator {
+pub trait IterInspector: Iterator {
     fn debug(self) -> DebugInspector<Self> {
         unimplemented!()
     }
@@ -11,7 +11,7 @@ pub trait Inspector: Iterator {
     }
 }
 
-impl<T> Inspector for T
+impl<T> IterInspector for T
 where
     T: Iterator,
     T::Item: fmt::Debug,
@@ -22,7 +22,7 @@ where
     }
 }
 
-impl<T> Inspector for T
+impl<T> IterInspector for T
 where
     T: Iterator,
     T::Item: fmt::Display,
@@ -33,7 +33,7 @@ where
     }
 }
 
-impl<T> Inspector for T
+impl<T> IterInspector for T
 where
     T: Iterator,
     T::Item: fmt::Debug + fmt::Display,

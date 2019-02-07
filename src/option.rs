@@ -1,6 +1,7 @@
 use std::fmt;
 
-pub trait Inspector<T> {
+#[allow(clippy::module_name_repetitions)]
+pub trait OptionInspector<T> {
     fn inspect<F>(self, f: F) -> Option<T>
     where
         F: FnMut(&T);
@@ -8,7 +9,7 @@ pub trait Inspector<T> {
     fn debug(self) -> Option<T>;
 }
 
-impl<T> Inspector<T> for Option<T>
+impl<T> OptionInspector<T> for Option<T>
 where
     T: fmt::Debug,
 {
