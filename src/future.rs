@@ -2,8 +2,6 @@
 
 use futures::{Async, Future, Poll};
 
-/// Do something with the error item of a future, passing it on.
-///
 /// This is created by the `FutureInspector::inspect_err` method.
 #[derive(Debug)]
 #[must_use = "futures do nothing unless polled"]
@@ -45,8 +43,17 @@ where
     }
 }
 
+/// Do something with the error of a future, passing it on.
+/// This combinator was implemented in futures-0.2 series (which is now dead),
+/// but never made it back to futures-0.1.x series.
 #[allow(clippy::module_name_repetitions)]
 pub trait FutureInspector<I, E>: Future<Item = I, Error = E> {
+    /// Do something with the error of a future, passing it on.
+    ///
+    /// When using futures, you'll often chain several of them together.
+    /// While working on such code, you might want to check out what's happening to the errors
+    /// at various parts in the pipeline. To do that, insert a call to inspect_err().
+
     fn inspect_err<F>(self, f: F) -> InspectErr<Self, F>
     where
         for<'r> F: FnOnce(&'r Self::Error) -> (),
