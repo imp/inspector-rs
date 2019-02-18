@@ -5,12 +5,15 @@
 //! inspection capabilities.
 //!
 //! Implementation and availability of each trait is guarded by the dedicated feature, so that
-//! you can choose which one is available.
+//! you can choose which one is available. In addition, by default when compiled with --release
+//! these combinators do nothing, so that if you use them for debugging purposes you can safely
+//! leave them in the code. However, if you do want this functionality in release binary - enable
+//! feature `inspect-release`.
 //!
 //! # Features
+//! - `inspect-release` - makes the combinators active in release mode
 //! - `option` - enables trait `OptionInspector`
 //! - `result` - enables trait `ResultInspector`
-//! - `iter` - enables trait `IterInspector` (broken at the moment)
 //! - `futures` - enables trait `FuturesInspector`
 
 #![cfg_attr(feature = "pedantic", warn(clippy::pedantic))]
