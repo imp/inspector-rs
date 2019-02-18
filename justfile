@@ -4,6 +4,8 @@ clean:
     cargo clean
 test:
     cargo test --all
+    cargo test --all --release
+    cargo test --all --release --features inspect-release
 update:
     cargo update
 clippy:

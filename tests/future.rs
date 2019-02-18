@@ -38,6 +38,10 @@ mod tests {
             })
             .wait();
 
-        assert!(inspect_called);
+        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+            assert!(inspect_called);
+        } else {
+            assert!(!inspect_called);
+        }
     }
 }
