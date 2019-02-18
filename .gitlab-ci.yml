@@ -1,34 +1,23 @@
-.cargo_test_template: &cargo_test
+.test:cargo:
   stage: test
   script:
-    - cargo test --verbose --jobs 1
+    - cargo fmt --all -- --check
+    - cargo clippy --all --tests --all-features
+    - cargo test --all
+    - cargo test --all --release
+    - cargo test --all --release --features inspect-release
 
 stages:
   - test
-  - deploy
 
-cargo:stable:
+.stable:test:
+  extends: .test:cargo
   image: rustdocker/rust:stable
-  <<: *cargo_test
 
-cargo:beta:
+.beta:test:
+  extends: .test:cargo
   image: rustdocker/rust:beta
-  <<: *cargo_test
 
-cargo:nightly:
+nightly:test:
+  extends: .test:cargo
   image: rustdocker/rust:nightly
-  <<: *cargo_test
-
-.pages:
-  image: rustdocker/rust:stable
-  stage: deploy
-  only:
-    - master
-  script:
-    - cargo doc
-    - rm -rf public
-    - mkdir public
-    - cp -R target/doc/* public
-  artifacts:
-    paths:
-    - public
