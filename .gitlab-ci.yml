@@ -10,11 +10,11 @@
 stages:
   - test
 
-.stable:test:
+stable:test:
   extends: .test:cargo
   image: rustdocker/rust:stable
 
-.beta:test:
+beta:test:
   extends: .test:cargo
   image: rustdocker/rust:beta
 
