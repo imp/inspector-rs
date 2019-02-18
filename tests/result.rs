@@ -16,7 +16,11 @@ mod tests {
         })
         .unwrap();
 
-        assert!(inspect_called);
+        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+            assert!(inspect_called);
+        } else {
+            assert!(!inspect_called);
+        }
 
         o.inspect_err(|_| unreachable!()).unwrap();
     }

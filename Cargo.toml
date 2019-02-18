@@ -24,7 +24,8 @@ log = "0.4"
 
 [features]
 default = ["futures", "option", "result"]
-iter = []
+# iter = []
+inspect-release = []
 option = []
 pedantic = []
 result = []

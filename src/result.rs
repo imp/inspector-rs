@@ -63,9 +63,12 @@ where
     where
         F: FnMut(&T),
     {
-        if let Ok(ref item) = self {
-            f(item);
+        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+            if let Ok(ref item) = self {
+                f(item);
+            }
         }
+
         self
     }
 
