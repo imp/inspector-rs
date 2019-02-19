@@ -63,7 +63,7 @@ where
     where
         F: FnMut(&T),
     {
-        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
             if let Ok(ref item) = self {
                 f(item);
             }
@@ -77,9 +77,12 @@ where
     where
         F: FnMut(&E),
     {
-        if let Err(ref item) = self {
-            f(item);
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
+            if let Err(ref item) = self {
+                f(item);
+            }
         }
+
         self
     }
 

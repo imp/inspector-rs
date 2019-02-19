@@ -36,7 +36,7 @@ where
             Ok(Async::NotReady) => Ok(Async::NotReady),
             Ok(Async::Ready(e)) => Ok(Async::Ready(e)),
             Err(e) => {
-                if cfg!(any(debug_assertions, feature = "inspect-release")) {
+                if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
                     (self.f.take().expect("cannot poll InspectErr twice"))(&e);
                 }
                 Err(e)

@@ -45,7 +45,7 @@ where
     where
         F: FnMut(&T),
     {
-        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
             if let Some(ref item) = self {
                 f(item)
             }

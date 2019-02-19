@@ -5,7 +5,7 @@ clean:
 test:
     cargo test --all
     cargo test --all --release
-    cargo test --all --release --features inspect-release
+    cargo test --all --release --features debug-only
 update:
     cargo update
 clippy:

@@ -16,7 +16,7 @@ mod tests {
         })
         .unwrap();
 
-        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
             assert!(inspect_called);
         } else {
             assert!(!inspect_called);
@@ -45,7 +45,11 @@ mod tests {
         })
         .unwrap_err();
 
-        assert!(inspect_called);
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
+            assert!(inspect_called);
+        } else {
+            assert!(!inspect_called);
+        }
 
         o.inspect(|_| unreachable!()).unwrap_err();
     }

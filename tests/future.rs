@@ -38,7 +38,7 @@ mod tests {
             })
             .wait();
 
-        if cfg!(any(debug_assertions, feature = "inspect-release")) {
+        if cfg!(any(debug_assertions, not(feature = "debug-only"))) {
             assert!(inspect_called);
         } else {
             assert!(!inspect_called);
