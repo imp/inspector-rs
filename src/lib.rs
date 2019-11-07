@@ -17,9 +17,15 @@
 //! - `futures` - enables trait `FuturesInspector`
 
 #![cfg_attr(feature = "pedantic", warn(clippy::pedantic))]
-#![warn(rust_2018_idioms)]
 #![warn(clippy::use_self)]
-#![deny(warnings, missing_debug_implementations)]
+#![warn(deprecated_in_future)]
+#![warn(future_incompatible)]
+#![warn(unreachable_pub)]
+#![warn(missing_debug_implementations)]
+#![warn(rust_2018_compatibility)]
+#![warn(rust_2018_idioms)]
+#![warn(unused)]
+#![deny(warnings)]
 
 #[cfg(feature = "futures")]
 mod future;
