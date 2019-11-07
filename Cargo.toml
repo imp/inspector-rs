@@ -23,9 +23,9 @@ futures = { version = "0.1", optional = true }
 log = "0.4"
 
 [features]
-default = ["futures", "option", "result"]
-# iter = []
+default = ["futures01", "option", "result"]
 debug-only = []
+futures01 = ["futures"]
 option = []
 pedantic = []
 result = []
