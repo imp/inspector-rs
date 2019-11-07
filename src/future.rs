@@ -54,7 +54,7 @@ pub trait FutureInspector<I, E>: Future<Item = I, Error = E> {
     ///
     /// When using futures, you'll often chain several of them together.
     /// While working on such code, you might want to check out what's happening to the errors
-    /// at various parts in the pipeline. To do that, insert a call to inspect_err().
+    /// at various parts in the pipeline. To do that, insert a call to `inspect_err()`.
 
     fn inspect_err<F>(self, f: F) -> InspectErr<Self, F>
     where
