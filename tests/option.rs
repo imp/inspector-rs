@@ -20,7 +20,7 @@ mod tests {
     #[test]
     fn debug() {
         let _o = Some(155);
-        let x = _o.debug().and_then(|i| Some(i * 2));
+        let x = _o.debug().map(|i| i * 2);
         assert_eq!(x, Some(310));
     }
 }
