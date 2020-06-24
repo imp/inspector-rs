@@ -16,7 +16,7 @@ where
 impl<A, F> InspectErr<A, F>
 where
     A: Future,
-    for<'r> F: FnOnce(&'r A::Error) -> (),
+    for<'r> F: FnOnce(&'r A::Error),
 {
     fn new(future: A, f: F) -> Self {
         Self { future, f: Some(f) }
@@ -58,7 +58,7 @@ pub trait FutureInspector<I, E>: Future<Item = I, Error = E> {
 
     fn inspect_err<F>(self, f: F) -> InspectErr<Self, F>
     where
-        for<'r> F: FnOnce(&'r Self::Error) -> (),
+        for<'r> F: FnOnce(&'r Self::Error),
         Self: Sized,
     {
         assert_future::<Self::Item, Self::Error, _>(InspectErr::new(self, f))
